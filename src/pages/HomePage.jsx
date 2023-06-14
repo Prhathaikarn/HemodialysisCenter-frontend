@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import LoginForm from '../components/LoginForm';
 import { User, Edit } from '../icons/index';
 import RegisterForm from '../components/RegisterForm';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
   return (

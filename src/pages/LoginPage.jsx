@@ -6,7 +6,7 @@ import { AuthContext } from '../contexts/AuthContext';
 
 export default function LoginPage() {
   const auth = useContext(AuthContext);
-  console.log(auth);
+  // console.log(auth);
   return (
     <div>
       <div>

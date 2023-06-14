@@ -10,7 +10,7 @@ const loginSchema = Joi.object({
 });
 
 export default (input) => {
-  console.log(input);
+  // console.log(input);
   const { error } = loginSchema.validate(input, { abortEarly: false });
   if (error) {
     return error.details.reduce((acc, el) => {

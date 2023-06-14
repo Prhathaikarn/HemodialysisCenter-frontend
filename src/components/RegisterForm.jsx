@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Edit } from '../icons';
 import { register } from '../api/auth-api';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const initialInput = {
   firstName: '',
@@ -17,6 +18,7 @@ const initialInput = {
 export default function RegisterForm() {
   const [input, setInput] = useState(initialInput);
   const [error, setError] = useState({});
+
   const navigate = useNavigate();
 
   const handleChangeInput = (e) => {
@@ -25,6 +27,7 @@ export default function RegisterForm() {
 
   const handleSubmitForm = (onSubmit) => async (e) => {
     e.preventDefault();
+
     const result = validateRegister(input);
     if (result) {
       return setError(result);
@@ -38,7 +41,8 @@ export default function RegisterForm() {
     try {
       const result = await register(value);
       if (result.success) {
-        navigate('/login');
+        toast.success('Register successfully!');
+        navigate('/');
       }
     } catch (err) {}
   };
@@ -103,7 +107,10 @@ export default function RegisterForm() {
       </div>
 
       <div className="flex justify-center mt-8">
-        <button className="flex justify-center items-center gap-2 text-blue-900 text-xl font-bold px-4 py-2 rounded-lg shadow-lg bg-blue-200 hover:bg-gray-300 w-44 h-14 ">
+        <button
+          type="submit"
+          className="flex justify-center items-center gap-2 text-blue-900 text-xl font-bold px-4 py-2 rounded-lg shadow-lg bg-blue-200 hover:bg-gray-300 w-44 h-14 "
+        >
           <Edit /> Sign up
         </button>
       </div>

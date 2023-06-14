@@ -1,4 +1,4 @@
-export default function PatientForm(prop) {
+export default function PatientListTest(prop) {
   const { list } = prop;
   const arr = list.map((patient) => (
     <div className=" border border-blue-900" id={patient.id} key={patient.id}>
@@ -16,7 +16,7 @@ export default function PatientForm(prop) {
   ));
   return (
     <div>
-      <div className="mt-10 px-72 text-blue-900">
+      <div className="mt-10 mb-10 px-72 text-blue-900">
         <div className="grid grid-cols-4 border border-blue-900 text-xl font-semibold p-2 bg-blue-200">
           <div className="">HN</div>
           <div className="">Name</div>

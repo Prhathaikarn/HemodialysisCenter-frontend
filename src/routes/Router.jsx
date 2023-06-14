@@ -5,6 +5,7 @@ import RegisterPage from '../pages/RegisterPage';
 import AllPatientPage from '../pages/AllPatientPage';
 import AddPatientPage from '../pages/AddPatientPage';
 import RedirectIfAuthenticated from '../components/RedirectIfAuthenticated';
+import PatientPage from '../pages/PatientPage';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: 'addpatient',
     element: <AddPatientPage />,
+  },
+  {
+    path: 'patient/getpatientbyid/:hnId',
+    element: <PatientPage />,
   },
 ]);
 

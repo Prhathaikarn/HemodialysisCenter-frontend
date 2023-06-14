@@ -36,9 +36,9 @@ const addPatientSchema = Joi.object({
 });
 
 const validateAddPatient = (input) => {
-  console.log('input--------', input);
+  // console.log('input--------', input);
   const { error } = addPatientSchema.validate(input, { abortEarly: false });
-  console.log('error-------', error);
+  // console.log('error-------', error);
   if (error) {
     return error.details.reduce((acc, el) => {
       acc[el.path[0]] = el.message;

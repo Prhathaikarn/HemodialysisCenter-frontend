@@ -1,9 +1,8 @@
 import AddPatientInput from './AddPatientInput';
-import validateAddPatient from '../validators/validate-addPatient';
 import InputErrorMessage from './InputErrorMessage';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { addPatient } from '../api/patient-api';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { deletePatient, updatePatientById } from '../api/patient-api';
 
 const initialInput = {
   firstName: '',
@@ -18,11 +17,18 @@ const initialInput = {
   doctorLname: '',
 };
 
-export default function EditPatientForm() {
-  const [input, setInput] = useState(initialInput);
+export default function EditPatientForm({
+  value,
+  getAllPatient,
+  setPatientList,
+}) {
+  const [input, setInput] = useState(value);
   const [error, setError] = useState({});
 
   const navigate = useNavigate();
+
+  const a = useParams();
+  // console.log('--a--', a);
 
   const handleChangeInput = (e) => {
     // console.log(e);
@@ -31,31 +37,27 @@ export default function EditPatientForm() {
 
   const handleSubmitForm = async (e) => {
     try {
-      e.preventDefault();
-      console.log('sdfsfs');
-
-      const result = validateAddPatient(input);
-      // console.log('result------', result);
-
-      if (result) {
-        return setError(result);
-      }
-      setError({});
-      await onSubmit(input);
-      setInput(initialInput);
-    } catch (err) {
-      // console.log('err-------', err);
-    }
+      // e.preventDefault();
+      await updatePatientById(value.hnId, input).then((result) => {
+        getAllPatient().then((res) => setPatientList(res));
+        // console.log(result);
+        navigate('/allpatient');
+      });
+      // if (result) {
+      //   return setError(result);
+      // }
+      // setError({});
+    } catch (err) {}
   };
 
-  const onSubmit = async (value) => {
+  const handleDelete = async () => {
     try {
-      // console.log('value------', value);
-      const result = await addPatient(value);
-      if (result) {
-        navigate('/allpatient');
-      }
-    } catch (err) {}
+      await deletePatient(value.hnId).then((result) => {
+        getAllPatient().then((res) => setPatientList(res));
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -94,69 +96,6 @@ export default function EditPatientForm() {
               isInvalid={error.hnId}
             />
             {error.hnId && <InputErrorMessage message={error.hnId} />}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-x-3 gap-y-4 text-center items-center mb-4">
-          <div className="text-start">
-            <div className="flex gap-10">
-              <div className="flex gap-2">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="Male"
-                  onChange={handleChangeInput}
-                />
-                <label htmlFor="Male">Male</label>
-              </div>
-              <div className="flex gap-2">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="Female"
-                  onChange={handleChangeInput}
-                />
-                <label htmlFor="Female">Female</label>
-              </div>
-              <div className="flex gap-2">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="Other"
-                  onChange={handleChangeInput}
-                />
-                <label htmlFor="Other">Other</label>
-              </div>
-            </div>
-            {error.gender && <InputErrorMessage message={error.gender} />}
-          </div>
-
-          <div>
-            <div className="grid grid-cols-2 gap-x-3 gap-y-4">
-              <div>
-                <AddPatientInput
-                  name="birthDate"
-                  placeholder="Date of birth"
-                  type="date"
-                  value={input.birthDate}
-                  onChange={handleChangeInput}
-                  isInvalid={error.birthDate}
-                />
-                {error.birthDate && (
-                  <InputErrorMessage message={error.birthDate} />
-                )}
-              </div>
-              <div>
-                <AddPatientInput
-                  name="age"
-                  placeholder="Age"
-                  value={input.age}
-                  onChange={handleChangeInput}
-                  isInvalid={error.age}
-                />
-                {error.age && <InputErrorMessage message={error.age} />}
-              </div>
-            </div>
           </div>
         </div>
 
@@ -223,11 +162,12 @@ export default function EditPatientForm() {
         >
           Submit
         </button>
-        <Link to="/allpatient">
-          <button className="flex justify-center items-center gap-2 text-blue-900 text-xl font-bold px-4 py-2 rounded-lg shadow-lg bg-yellow-300 hover:bg-gray-300 w-44 h-14">
-            Cancel
-          </button>
-        </Link>
+        <button
+          className="flex justify-center items-center gap-2 text-blue-900 text-xl font-bold px-4 py-2 rounded-lg shadow-lg bg-gray-300 hover:bg-gray-300 w-44 h-14"
+          onClick={handleDelete}
+        >
+          Delete
+        </button>
       </div>
     </form>
   );

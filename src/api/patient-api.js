@@ -5,3 +5,12 @@ export const addPatient = (input) =>
 
 export const getAllPatient = () =>
   request.get('/patient/getallpatient').then((result) => result.data);
+
+export const getPatientById = (hnId) =>
+  request.get(`/patient/getpatientbyid/${hnId}`);
+
+export const updatePatientById = (hnId, input) =>
+  request.put(`/patient/updatepatientbyid/${hnId}`, input);
+
+export const deletePatient = (hnId) =>
+  request.delete(`/patient/deletepatient/${hnId}`);

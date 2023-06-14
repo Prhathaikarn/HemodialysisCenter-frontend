@@ -1,10 +1,10 @@
 import LoginInput from './LoginInput';
 import validateLogin from '../validators/validate-login';
 import InputErrorMessage from './InputErrorMessage';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { User } from '../icons';
 import { login } from '../api/auth-api';
-import AuthContext, { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 import { setAccessToken } from '../utils/localstorage';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,9 +16,9 @@ const initialInput = {
 export default function LoginForm() {
   const [input, setInput] = useState(initialInput);
   const [error, setError] = useState({});
-  const { setToken, token } = useAuth();
+  const { token, setToken } = useAuth();
   const navigate = useNavigate();
-  console.log('token', token);
+  // console.log('token', token);
 
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -67,6 +67,7 @@ export default function LoginForm() {
           <LoginInput
             placeholder="Password"
             name="password"
+            type="password"
             value={input.password}
             onChange={handleChangeInput}
             isInvalid={error.password}

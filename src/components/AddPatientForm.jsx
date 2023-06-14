@@ -32,7 +32,7 @@ export default function AddPatientForm() {
   const handleSubmitForm = async (e) => {
     try {
       e.preventDefault();
-      console.log('sdfsfs');
+      // console.log('sdfsfs');
 
       const result = validateAddPatient(input);
       // console.log('result------', result);
@@ -224,7 +224,7 @@ export default function AddPatientForm() {
           Submit
         </button>
         <Link to="/allpatient">
-          <button className="flex justify-center items-center gap-2 text-blue-900 text-xl font-bold px-4 py-2 rounded-lg shadow-lg bg-yellow-300 hover:bg-gray-300 w-44 h-14">
+          <button className="flex justify-center items-center gap-2 text-blue-900 text-xl font-bold px-4 py-2 rounded-lg shadow-lg bg-gray-300 hover:bg-gray-300 w-44 h-14">
             Cancel
           </button>
         </Link>
