@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import State, { Add, Lab, Med, Users } from '../icons';
-import {} from '../contexts/PatientContext';
+import { Add, Lab, Med, State, Users } from '../icons';
 import { getPatientById } from '../api/patient-api';
 import { useParams } from 'react-router-dom';
 
@@ -29,7 +28,7 @@ export default function PatientPage() {
     fetchPatient();
   }, [hnId]);
 
-  console.log(patient);
+  // console.log(patient);
 
   return (
     <div>

@@ -12,5 +12,8 @@ export const getPatientById = (hnId) =>
 export const updatePatientById = (hnId, input) =>
   request.put(`/patient/updatepatientbyid/${hnId}`, input);
 
+export const searchPatient = (input) =>
+  request.post('/patient/searchpatient/', input);
+
 export const deletePatient = (hnId) =>
   request.delete(`/patient/deletepatient/${hnId}`);

@@ -4,10 +4,27 @@ import Navbar from '../components/Navbar';
 import { Add, Search } from '../icons';
 import PatientList from '../components/PatientList';
 import { useState, useEffect } from 'react';
-import { getAllPatient } from '../api/patient-api';
+import { getAllPatient, searchPatient } from '../api/patient-api';
+// import SearchForm from '../components/SearchFrom';
 
 export default function AllPatientPage() {
   const [patientList, setPatientList] = useState([]);
+
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      searchPatient({ search: searchValue }).then((res) => {
+        // console.log(res.data);
+        setPatientList(res.data);
+      });
+    }, 200);
+    return () => clearTimeout(id);
+  }, [searchValue]);
 
   useEffect(() => {
     getAllPatient().then((res) => {
@@ -25,6 +42,8 @@ export default function AllPatientPage() {
       </div>
       <div className="flex justify-center gap-4">
         <input
+          onChange={handleChange}
+          value={searchValue}
           type="search"
           className="block w-[500px] text-blue-900 shadow rounded-md border px-3 outline-none text-xl focus:ring"
           placeholder="Search Name or HN "

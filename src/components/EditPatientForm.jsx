@@ -1,7 +1,7 @@
 import AddPatientInput from './AddPatientInput';
 import InputErrorMessage from './InputErrorMessage';
 import { useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { deletePatient, updatePatientById } from '../api/patient-api';
 
 const initialInput = {
@@ -25,8 +25,6 @@ export default function EditPatientForm({
   const [input, setInput] = useState(value);
   const [error, setError] = useState({});
 
-  const navigate = useNavigate();
-
   const a = useParams();
   // console.log('--a--', a);
 
@@ -37,12 +35,11 @@ export default function EditPatientForm({
 
   const handleSubmitForm = async (e) => {
     try {
-      // e.preventDefault();
-      await updatePatientById(value.hnId, input).then((result) => {
-        getAllPatient().then((res) => setPatientList(res));
-        // console.log(result);
-        navigate('/allpatient');
-      });
+      e.preventDefault();
+      await updatePatientById(value.hnId, input);
+      await getAllPatient().then((res) => setPatientList(res));
+      // console.log(result);
+      window.location.reload();
       // if (result) {
       //   return setError(result);
       // }
@@ -52,9 +49,8 @@ export default function EditPatientForm({
 
   const handleDelete = async () => {
     try {
-      await deletePatient(value.hnId).then((result) => {
-        getAllPatient().then((res) => setPatientList(res));
-      });
+      await deletePatient(value.hnId);
+      await getAllPatient().then((res) => setPatientList(res));
     } catch (err) {
       console.log(err);
     }

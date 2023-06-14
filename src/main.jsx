@@ -4,7 +4,6 @@ import App from './App.jsx';
 import AuthProvider from './contexts/AuthContext.jsx';
 import './index.css';
 // import 'react-toastify/dist/ReactToastify.css';
-import PatientProvider from './contexts/PatientContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

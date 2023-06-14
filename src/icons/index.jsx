@@ -184,7 +184,7 @@ export function Med() {
   );
 }
 
-export default function State() {
+export function State() {
   return (
     <svg
       height="2rem"

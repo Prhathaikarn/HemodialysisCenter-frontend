@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getPatientById } from '../api/patient-api';
 import EditPatientForm from './EditPatientForm';
 
 export default function PatientList(prop) {
   const { list, getAllPatient, setPatientList } = prop;
+
+  const inputEl = useRef();
 
   const fetchPatient = async (hnId) => {
     try {
@@ -46,6 +48,7 @@ export default function PatientList(prop) {
               htmlFor={`my-modal-${patient.hnId}`}
               className="flex justify-center items-center z-5 text-blue-900 text-xs font-bold px-2 py-2 rounded-lg shadow-lg bg-blue-200 hover:bg-gray-300  w-fit"
               onClick={() => fetchPatient(patient.hnId)}
+              ref={inputEl}
             >
               Edit
             </label>
@@ -63,6 +66,7 @@ export default function PatientList(prop) {
                   value={patient}
                   getAllPatient={getAllPatient}
                   setPatientList={setPatientList}
+                  inputEl={inputEl}
                 />
               </label>
             </label>
