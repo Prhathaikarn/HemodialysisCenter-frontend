@@ -7,6 +7,7 @@ import { login } from '../api/auth-api';
 import { useAuth } from '../contexts/AuthContext';
 import { setAccessToken } from '../utils/localstorage';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const initialInput = {
   nurseId: '',
@@ -44,6 +45,7 @@ export default function LoginForm() {
       setToken(result.accessToken);
       if (result.accessToken) {
         navigate('/allpatient');
+        toast.success('Login success!!')
       }
     } catch (err) {
       console.log(err);

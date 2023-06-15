@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import { Add, Lab, Med, State, Users } from '../icons';
+import { Add, Lab, Med, State, Hospital } from '../icons';
 import { getPatientById } from '../api/patient-api';
 import { useParams } from 'react-router-dom';
 
@@ -10,6 +10,8 @@ export default function PatientPage() {
   const [hnId, setHnId] = useState();
 
   const params = useParams();
+
+  console.log(params);
 
   // useEffect(() => {
   //   setHnId(params.hnId); // 5 sec
@@ -39,7 +41,7 @@ export default function PatientPage() {
         <div className="flex-[2] py-10">
           <div className="flex gap-6 bg-gray-300 p-4 pl-8 rounded-lg text-xl text-blue-900">
             <div className="flex justify-center items-center">
-              <Users />
+              <Hospital />
             </div>
             <div>
               <p className="text-2xl font-bold">{patient?.hnId}</p>
@@ -71,12 +73,12 @@ export default function PatientPage() {
                 Hemodialysis Laboratory Record
               </p>
 
-              <div className="flex justify-center border border-blue-900 text-xl font-semibold bg-blue-200 mt-5 p-2 w-[900px]">
-                <div className="w-[220px]">January</div>
-                <div className="w-[220px]">February</div>
-                <div className="w-[220px]">March</div>
-                <div className="w-[220px]">April</div>
-                <div className="w-[220px]">April</div>
+              <div className="flex justify-center border border-blue-900 text-xl text-center font-semibold bg-blue-200 mt-5 p-2 w-[900px]">
+                <div className="w-[220px]">Lab01</div>
+                <div className="w-[220px]">Lab02</div>
+                <div className="w-[220px]">Labo3</div>
+                <div className="w-[220px]">Lab04</div>
+                <div className="w-[220px]">Lab05</div>
               </div>
 
               <div className="w-[900px] h-96 border border-blue-900"></div>

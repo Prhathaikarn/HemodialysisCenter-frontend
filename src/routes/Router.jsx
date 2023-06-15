@@ -6,14 +6,20 @@ import AllPatientPage from '../pages/AllPatientPage';
 import AddPatientPage from '../pages/AddPatientPage';
 import RedirectIfAuthenticated from '../components/RedirectIfAuthenticated';
 import PatientPage from '../pages/PatientPage';
+import ProtectRoute from '../components/ProtectRoute';
+import Container from '../components/Container';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />,
+    element: (
+      <RedirectIfAuthenticated>
+        <HomePage />
+      </RedirectIfAuthenticated>
+    ),
   },
   {
-    path: 'login',
+    path: '/login',
     element: (
       <RedirectIfAuthenticated>
         <LoginPage />
@@ -21,20 +27,31 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: 'register',
+    path: '/register',
     element: <RegisterPage />,
   },
   {
-    path: 'allpatient',
-    element: <AllPatientPage />,
-  },
-  {
-    path: 'addpatient',
-    element: <AddPatientPage />,
-  },
-  {
-    path: 'patient/getpatientbyid/:hnId',
-    element: <PatientPage />,
+    path: '/allpatient/',
+    element: (
+      <ProtectRoute>
+        <Container />
+      </ProtectRoute>
+    ),
+    children: [
+      {
+        path: '/allpatient/',
+        element: <AllPatientPage />,
+      },
+      {
+        path: '/allpatient/addpatient/',
+        element: <AddPatientPage />,
+      },
+      {
+        path: '/allpatient/patient/getpatientbyid/:hnId',
+        element: <PatientPage />,
+
+      },
+    ],
   },
 ]);
 

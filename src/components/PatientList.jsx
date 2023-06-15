@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getPatientById } from '../api/patient-api';
 import EditPatientForm from './EditPatientForm';
@@ -6,7 +6,7 @@ import EditPatientForm from './EditPatientForm';
 export default function PatientList(prop) {
   const { list, getAllPatient, setPatientList } = prop;
 
-  const inputEl = useRef();
+  // const inputEl = useRef();
 
   const fetchPatient = async (hnId) => {
     try {
@@ -17,9 +17,8 @@ export default function PatientList(prop) {
     }
   };
 
+  // console.log('------', list);
   const arr = list.map((patient) => (
-    // console.log(patient)
-
     <div
       className="border border-blue-900"
       id={patient.hnId}
@@ -27,7 +26,7 @@ export default function PatientList(prop) {
     >
       <div className="flex justify-center items-center hover:bg-blue-100 p-2">
         <Link
-          to={`/patient/getpatientbyid/${patient.hnId}`}
+          to={`/allpatient/patient/getpatientbyid/${patient.hnId}`}
           className="flex justify-between"
         >
           <div className="w-[120px]">{patient.hnId}</div>
@@ -40,15 +39,14 @@ export default function PatientList(prop) {
         </Link>
 
         <div className="flex justify-between items-center w-[150px] ">
-          <Link to={`/patient/getpatientbyid/${patient.hnId}`}>
+          <Link to={`/allpatient/patient/getpatientbyid/${patient.hnId}`}>
             <div>{patient.updatedAt.toString().slice(0, 10)}</div>
           </Link>
           <div className="flex">
             <label
               htmlFor={`my-modal-${patient.hnId}`}
-              className="flex justify-center items-center z-5 text-blue-900 text-xs font-bold px-2 py-2 rounded-lg shadow-lg bg-blue-200 hover:bg-gray-300  w-fit"
+              className="flex justify-center items-center z-5 text-blue-900 text-xs font-bold px-2 py-2 rounded-lg shadow-lg bg-blue-200 hover:bg-gray-300  w-fit cursor-pointer"
               onClick={() => fetchPatient(patient.hnId)}
-              ref={inputEl}
             >
               Edit
             </label>
@@ -57,19 +55,21 @@ export default function PatientList(prop) {
               id={`my-modal-${patient.hnId}`}
               className="modal-toggle"
             />
-            <label
-              htmlFor={`my-modal-${patient.hnId}`}
-              className="modal cursor-pointer"
-            >
-              <label className="modal-box relative" htmlFor="">
+            <div className="modal">
+              <div className="modal-box">
                 <EditPatientForm
                   value={patient}
                   getAllPatient={getAllPatient}
                   setPatientList={setPatientList}
-                  inputEl={inputEl}
                 />
+              </div>
+              <label
+                className="modal-backdrop"
+                htmlFor={`my-modal-${patient.hnId}`}
+              >
+                Close
               </label>
-            </label>
+            </div>
           </div>
         </div>
       </div>

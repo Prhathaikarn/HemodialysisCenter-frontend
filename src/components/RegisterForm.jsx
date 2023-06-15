@@ -40,9 +40,10 @@ export default function RegisterForm() {
   const onSubmit = async (value) => {
     try {
       const result = await register(value);
-      if (result.success) {
-        toast.success('Register successfully!');
-        navigate('/');
+      console.log(result);
+      if (result) {
+        navigate('/login');
+        toast.success('Register success!!');
       }
     } catch (err) {}
   };

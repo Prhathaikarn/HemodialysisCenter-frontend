@@ -5,26 +5,22 @@ import { Add, Search } from '../icons';
 import PatientList from '../components/PatientList';
 import { useState, useEffect } from 'react';
 import { getAllPatient, searchPatient } from '../api/patient-api';
-// import SearchForm from '../components/SearchFrom';
 
 export default function AllPatientPage() {
   const [patientList, setPatientList] = useState([]);
 
   const [searchValue, setSearchValue] = useState('');
 
-  const handleChange = (e) => {
-    setSearchValue(e.target.value);
-  };
+  // const [list, setList] = useState([]);
 
-  useEffect(() => {
-    const id = setTimeout(() => {
-      searchPatient({ search: searchValue }).then((res) => {
-        // console.log(res.data);
-        setPatientList(res.data);
-      });
-    }, 200);
-    return () => clearTimeout(id);
-  }, [searchValue]);
+  const handleChange = (e) => {
+    if (document.getElementById('searchInput').value?.trim() == '') {
+      setSearchValue('');
+      window.location.reload();
+    } else {
+      setSearchValue(e.target.value);
+    }
+  };
 
   useEffect(() => {
     getAllPatient().then((res) => {
@@ -32,6 +28,17 @@ export default function AllPatientPage() {
       setPatientList(res);
     });
   }, []);
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      searchPatient({ search: searchValue }).then((res) => {
+        // console.log('searchhhhhh', res.data);
+
+        searchValue !== '' && setPatientList(res.data);
+      });
+    }, 200);
+    return () => clearTimeout(id);
+  }, [searchValue]);
 
   return (
     <div className="w-full h-auto">
@@ -43,6 +50,7 @@ export default function AllPatientPage() {
       <div className="flex justify-center gap-4">
         <input
           onChange={handleChange}
+          id="searchInput"
           value={searchValue}
           type="search"
           className="block w-[500px] text-blue-900 shadow rounded-md border px-3 outline-none text-xl focus:ring"
@@ -54,7 +62,6 @@ export default function AllPatientPage() {
         >
           <Search /> Search
         </button>
-        {/* <SearchForm /> */}
         <Link to="/addpatient">
           <button className="flex justify-center items-center gap-2 text-blue-900 text-xl font-bold px-4 py-2 rounded-lg shadow-lg bg-yellow-300 hover:bg-gray-300 w-48 h-14">
             <Add /> New Patient

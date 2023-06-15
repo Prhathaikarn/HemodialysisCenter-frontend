@@ -25,7 +25,7 @@ export default function EditPatientForm({
   const [input, setInput] = useState(value);
   const [error, setError] = useState({});
 
-  const a = useParams();
+  const param = useParams();
   // console.log('--a--', a);
 
   const handleChangeInput = (e) => {
@@ -154,7 +154,6 @@ export default function EditPatientForm({
         <button
           type="submit"
           className="flex justify-center items-center gap-2 text-blue-900 text-xl font-bold px-4 py-2 rounded-lg shadow-lg bg-yellow-300 hover:bg-gray-300 w-44 h-14"
-          // onClick={handleSubmitForm(onSubmit)}
         >
           Submit
         </button>

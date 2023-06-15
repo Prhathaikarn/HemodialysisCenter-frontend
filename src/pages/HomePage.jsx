@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import LoginForm from '../components/LoginForm';
 import { User, Edit } from '../icons/index';
 import RegisterForm from '../components/RegisterForm';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 function HomePage() {
   return (
@@ -39,18 +39,24 @@ function HomePage() {
               </label>
             </div>
             <input type="checkbox" id="my-modal-1" className="modal-toggle" />
-            <label htmlFor="my-modal-1" className="modal cursor-pointer">
-              <label className="modal-box relative" htmlFor="">
+            <div className="modal">
+              <div className="modal-box">
                 <LoginForm />
+              </div>
+              <label className="modal-backdrop" htmlFor="my-modal-1">
+                Close
               </label>
-            </label>
+            </div>
 
             <input type="checkbox" id="my-modal-2" className="modal-toggle" />
-            <label htmlFor="my-modal-2" className="modal cursor-pointer">
-              <label className="modal-box relative" htmlFor="">
+            <div className="modal">
+              <div className="modal-box">
                 <RegisterForm />
+              </div>
+              <label className="modal-backdrop" htmlFor="my-modal-2">
+                Close
               </label>
-            </label>
+            </div>
           </div>
         </div>
       </div>

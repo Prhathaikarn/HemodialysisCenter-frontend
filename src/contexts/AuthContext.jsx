@@ -4,13 +4,14 @@ import { getAccessToken, removeAccessToken } from '../utils/localstorage';
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+
   useEffect(() => {
     if (getAccessToken()) {
       setToken(getAccessToken());
     }
-  }, []);
+  }, []); //////\\\\\\
 
   const logout = () => {
     removeAccessToken('token');
@@ -18,7 +19,7 @@ export default function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, token, setToken, logout }}>
+    <AuthContext.Provider value={{ token, setToken, logout }}>
       {children}
     </AuthContext.Provider>
   );
