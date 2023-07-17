@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import AddPatientForm from '../components/AddPatientForm';
 import Navbar from '../components/Navbar';
 

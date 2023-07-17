@@ -21,7 +21,7 @@ export default function Navbar() {
         <>
           <div className="flex gap-6 justify-center items-center text-xl text-blue-900 font-semibold">
             <div className="cursor-pointer">
-              <Link to="/allpatient">Home</Link>
+              <Link to="/patient/getallpatient">Home</Link>
             </div>
             <div className="cursor-pointer" style={{ display: 'none' }}>
               <Link to="/login">Login</Link>

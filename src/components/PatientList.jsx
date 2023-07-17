@@ -26,7 +26,7 @@ export default function PatientList(prop) {
     >
       <div className="flex justify-center items-center hover:bg-blue-100 p-2">
         <Link
-          to={`/allpatient/patient/getpatientbyid/${patient.hnId}`}
+          to={`/patient/getpatientbyid/${patient.hnId}`}
           className="flex justify-between"
         >
           <div className="w-[120px]">{patient.hnId}</div>
@@ -39,7 +39,7 @@ export default function PatientList(prop) {
         </Link>
 
         <div className="flex justify-between items-center w-[150px] ">
-          <Link to={`/allpatient/patient/getpatientbyid/${patient.hnId}`}>
+          <Link to={`/patient/getpatientbyid/${patient.hnId}`}>
             <div>{patient.updatedAt.toString().slice(0, 10)}</div>
           </Link>
           <div className="flex">

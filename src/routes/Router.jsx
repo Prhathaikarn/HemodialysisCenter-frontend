@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    path: '/allpatient/',
+    path: '/patient/',
     element: (
       <ProtectRoute>
         <Container />
@@ -39,17 +39,16 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: '/allpatient/',
+        path: '/patient/getallpatient/',
         element: <AllPatientPage />,
       },
       {
-        path: '/allpatient/addpatient/',
+        path: '/patient/addpatient/',
         element: <AddPatientPage />,
       },
       {
-        path: '/allpatient/patient/getpatientbyid/:hnId',
+        path: '/patient/getpatientbyid/:hnId',
         element: <PatientPage />,
-
       },
     ],
   },

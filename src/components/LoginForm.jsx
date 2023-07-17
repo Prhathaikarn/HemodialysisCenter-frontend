@@ -44,7 +44,7 @@ export default function LoginForm() {
       setAccessToken(result.accessToken);
       setToken(result.accessToken);
       if (result.accessToken) {
-        navigate('/allpatient');
+        navigate('/patient/getallpatient');
         toast.success('Login success!!')
       }
     } catch (err) {

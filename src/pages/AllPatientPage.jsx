@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { Add, Search } from '../icons';
 import PatientList from '../components/PatientList';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { getAllPatient, searchPatient } from '../api/patient-api';
 
 export default function AllPatientPage() {
@@ -11,8 +11,29 @@ export default function AllPatientPage() {
 
   const [searchValue, setSearchValue] = useState('');
 
-  // const [list, setList] = useState([]);
+  // ท่าพี่เจียง
+  // useEffect(() => {
+  //   getAllPatient().then((res) => {
+  //     setPatientList(res);
+  //   });
+  // }, []);
 
+  // const searchPatients = useMemo(() => {
+  //   return () => {
+  //     const filteredList = patientList.filter(
+  //       (el) =>
+  //         searchValue.trim() === '' ||
+  //         el.target.toLowerCase().includes(searchValue.toLowerCase())
+  //     );
+  //     setPatientList(filteredList);
+  //   };
+  // }, [searchValue, patientList]);
+
+  // useEffect(() => {
+  //   searchPatients();
+  // }, [setSearchValue, searchPatients]);
+
+  // เดิม
   const handleChange = (e) => {
     if (document.getElementById('searchInput').value?.trim() == '') {
       setSearchValue('');
@@ -22,6 +43,7 @@ export default function AllPatientPage() {
     }
   };
 
+  // //เดิม
   useEffect(() => {
     getAllPatient().then((res) => {
       // console.log(res);
@@ -40,6 +62,7 @@ export default function AllPatientPage() {
     return () => clearTimeout(id);
   }, [searchValue]);
 
+  
   return (
     <div className="w-full h-auto">
       <Navbar />
@@ -62,7 +85,7 @@ export default function AllPatientPage() {
         >
           <Search /> Search
         </button>
-        <Link to="/addpatient">
+        <Link to="/patient/addpatient">
           <button className="flex justify-center items-center gap-2 text-blue-900 text-xl font-bold px-4 py-2 rounded-lg shadow-lg bg-yellow-300 hover:bg-gray-300 w-48 h-14">
             <Add /> New Patient
           </button>
